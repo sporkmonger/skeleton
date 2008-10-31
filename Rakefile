@@ -25,7 +25,7 @@ RUBY_FORGE_USER    = "sporkmonger"
 RUBY_FORGE_PATH    = "/var/www/gforge-projects/#{RUBY_FORGE_PROJECT}"
 RUBY_FORGE_URL     = "http://#{RUBY_FORGE_PROJECT}.rubyforge.org/"
 
-PKG_SUMMARY        = "Project Skeleton"
+PKG_SUMMARY        = "Package Summary"
 PKG_DESCRIPTION    = <<-TEXT
 Library description goes here.
 TEXT
