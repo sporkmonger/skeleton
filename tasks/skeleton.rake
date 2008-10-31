@@ -1,6 +1,5 @@
 namespace :skeleton do
   task :init do
-    puts File.basename(File.expand_path("."))
     if File.basename(File.expand_path(".")) == "skeleton"
       puts "Cannot initialize the skeleton itself."
       exit(1)
@@ -39,13 +38,15 @@ namespace :skeleton do
     file_list = FileList[
       "lib/**/*", "spec/**/*", "vendor/**/*",
       "tasks/**/*", "website/**/*",
-      "[A-Z]*", "Rakefile"
+      "[A-Z]*", "Rakefile", ".gitignore"
     ].exclude(/database\.yml/).exclude(/[_\.]git$/)
 
     system("rm -rf .git")
     system("git init")
     system("git add #{file_list.join(" ")}")
     system("git status")
+
+    puts "Run 'git commit -m \"Project Skeleton\"'."
 
     File.delete(__FILE__)
   end
