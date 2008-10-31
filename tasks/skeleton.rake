@@ -28,8 +28,10 @@ namespace :skeleton do
         File.open(file_name, "w") { |file| file.write(contents) }
       end
     end
+    file_list.sort! { |a, b| File.directory?(a) ? 1 : -1 }
     for file_name in file_list
-      if File.directory?(file_name) && file_name =~ /skeleton/
+      if File.basename(file_name) =~ /skeleton/ &&
+          File.basename(file_name) != "skeleton.rake"
         File.rename(
           file_name, file_name.gsub(/skeleton/, project_require_name)
         )
