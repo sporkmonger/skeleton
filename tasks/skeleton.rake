@@ -46,7 +46,8 @@ namespace :skeleton do
     system("git add #{file_list.join(" ")}")
     system("git status")
 
-    puts "Run 'git commit -m \"Project Skeleton\"'."
+    puts
+    puts "Run 'git commit -m \"Basic project skeleton.\"'."
 
     File.delete(__FILE__)
   end
