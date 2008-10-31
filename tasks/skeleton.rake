@@ -39,7 +39,9 @@ namespace :skeleton do
       "lib/**/*", "spec/**/*", "vendor/**/*",
       "tasks/**/*", "website/**/*",
       "[A-Z]*", "Rakefile", ".gitignore"
-    ].exclude(/database\.yml/).exclude(/[_\.]git$/)
+    ].exclude(/database\.yml/).exclude(/[_\.]git$/).exclude(/skeleton/)
+
+    File.delete(__FILE__)
 
     system("rm -rf .git")
     system("git init")
@@ -48,7 +50,5 @@ namespace :skeleton do
 
     puts
     puts "Run 'git commit -m \"Basic project skeleton.\"'."
-
-    File.delete(__FILE__)
   end
 end
