@@ -20,6 +20,7 @@ namespace :gem do
 
     s.add_development_dependency("rake", ">= 0.8.3")
     s.add_development_dependency("rspec", ">= 1.1.11")
+    s.add_development_dependency("launchy", ">= 0.3.2")
 
     s.require_path = "lib"
 
