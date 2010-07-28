@@ -9,7 +9,13 @@ require 'rake/rdoctask'
 require 'rake/packagetask'
 require 'rake/gempackagetask'
 require 'rake/contrib/rubyforgepublisher'
-require 'spec/rake/spectask'
+
+begin
+  require 'spec/rake/spectask'
+rescue LoadError
+  STDERR.puts "Please install RSpec."
+  exit(1)
+end
 
 require File.join(File.dirname(__FILE__), 'lib/skeleton', 'version')
 
