@@ -32,6 +32,9 @@ RUBY_FORGE_USER    = "sporkmonger"
 RUBY_FORGE_PATH    = "/var/www/gforge-projects/#{RUBY_FORGE_PROJECT}"
 RUBY_FORGE_URL     = "http://#{RUBY_FORGE_PROJECT}.rubyforge.org/"
 
+PKG_AUTHOR         = "Bob Aman"
+PKG_AUTHOR_EMAIL   = "bob@sporkmonger.com"
+PKG_HOMEPAGE       = RUBY_FORGE_URL
 PKG_SUMMARY        = "Package Summary"
 PKG_DESCRIPTION    = <<-TEXT
 Library description goes here.

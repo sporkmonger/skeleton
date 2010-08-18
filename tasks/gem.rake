@@ -9,8 +9,12 @@ namespace :gem do
 
     s.name = PKG_NAME
     s.version = PKG_VERSION
+    s.author = PKG_AUTHOR
+    s.email = PKG_AUTHOR_EMAIL
+    s.homepage = PKG_HOMEPAGE
     s.summary = PKG_SUMMARY
     s.description = PKG_DESCRIPTION
+    s.rubyforge_project = RUBY_FORGE_PROJECT
 
     s.files = PKG_FILES.to_a
 
@@ -21,13 +25,9 @@ namespace :gem do
     s.add_development_dependency("rake", ">= 0.8.3")
     s.add_development_dependency("rspec", ">= 1.1.11")
     s.add_development_dependency("launchy", ">= 0.3.2")
+    s.add_development_dependency("diff-lcs", ">= 1.1.2")
 
     s.require_path = "lib"
-
-    s.author = "Bob Aman"
-    s.email = "bob@sporkmonger.com"
-    s.homepage = "http://#{PKG_NAME}.rubyforge.org/"
-    s.rubyforge_project = RUBY_FORGE_PROJECT
   end
 
   Rake::GemPackageTask.new(GEM_SPEC) do |p|
