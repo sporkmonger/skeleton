@@ -13,7 +13,8 @@ require 'rake/contrib/rubyforgepublisher'
 begin
   require 'spec/rake/spectask'
 rescue LoadError
-  STDERR.puts "Please install RSpec."
+  STDERR.puts "Please install rspec:"
+  STDERR.puts "sudo gem install rspec"
   exit(1)
 end
 
