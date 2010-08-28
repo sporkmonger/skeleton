@@ -36,6 +36,9 @@ namespace :doc do
     host = "#{config['username']}@rubyforge.org"
     remote_dir = RUBY_FORGE_PATH + "/api"
     local_dir = "doc"
+    if !File.exist?("website/api")
+      system("mkdir website/api")
+    end
     Rake::SshDirPublisher.new(host, remote_dir, local_dir).upload
   end
 end
@@ -52,6 +55,9 @@ namespace :spec do
     host = "#{config['username']}@rubyforge.org"
     remote_dir = RUBY_FORGE_PATH + "/specdoc"
     local_dir = "specdoc"
+    if !File.exist?("website/specdoc")
+      system("mkdir website/specdoc")
+    end
     Rake::SshDirPublisher.new(host, remote_dir, local_dir).upload
   end
 
@@ -67,6 +73,9 @@ namespace :spec do
       host = "#{config['username']}@rubyforge.org"
       remote_dir = RUBY_FORGE_PATH + "/coverage"
       local_dir = "coverage"
+      if !File.exist?("website/coverage")
+        system("mkdir website/coverage")
+      end
       Rake::SshDirPublisher.new(host, remote_dir, local_dir).upload
     end
   end
@@ -74,7 +83,7 @@ end
 
 namespace :website do
   desc "Publish website to RubyForge"
-  task :release => ["doc:release", "spec:release", "spec:rcov:release"] do
+  task :init do
     require "rake/contrib/sshpublisher"
     require "yaml"
 
@@ -86,4 +95,9 @@ namespace :website do
     local_dir = "website"
     Rake::SshDirPublisher.new(host, remote_dir, local_dir).upload
   end
+
+  desc "Publish website to RubyForge"
+  task :release => [
+    "website:init", "doc:release", "spec:release", "spec:rcov:release"
+  ]
 end
