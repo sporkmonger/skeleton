@@ -14,8 +14,8 @@
 
 # Used to prevent the class/module from being loaded more than once
 unless defined? Skeleton::VERSION
-  module Skeleton #:nodoc:
-    module VERSION #:nodoc:
+  module Skeleton
+    module VERSION
       MAJOR = 0
       MINOR = 1
       TINY  = 0
