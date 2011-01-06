@@ -2,7 +2,7 @@
 
 <dl>
   <dt>Homepage</dt><dd><a href="http://skeleton.rubyforge.org/">http://skeleton.rubyforge.org/</a></dd>
-  <dt>Author</dt><dd><a href="mailto:bobaman@google.com">Bob Aman</a></dd>
+  <dt>Author</dt><dd><a href="mailto:bob@sporkmonger.com">Bob Aman</a></dd>
   <dt>Copyright</dt><dd>Copyright © 2010 Bob Aman</dd>
   <dt>License</dt><dd>Apache 2.0</dd>
 </dl>
