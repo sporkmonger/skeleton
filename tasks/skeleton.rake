@@ -40,7 +40,7 @@ namespace :skeleton do
     file_list = FileList[
       'lib/**/*', 'spec/**/*', 'vendor/**/*',
       'tasks/**/*', 'website/**/*',
-      '[A-Z]*', 'Rakefile', '.gitignore'
+      '[A-Z]*', 'Rakefile', '.gitignore', '.travis.yml'
     ].exclude(/database\.yml/).exclude(/[_\.]git$/).exclude(/skeleton/)
 
     File.delete(__FILE__)
