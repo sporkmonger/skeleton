@@ -17,7 +17,7 @@ namespace :skeleton do
       'lib/**/*', 'spec/**/*', 'vendor/**/*',
       'tasks/**/*', 'website/**/*',
       '[A-Z]*', 'Rakefile'
-    ].exclude(/database\.yml/).exclude(/[_\.]git$/)
+    ].exclude(/database\.yml/).exclude(/[_\.]git$/).exclude(/Gemfile\.lock/)
 
     for file_name in file_list
       if File.file?(file_name)

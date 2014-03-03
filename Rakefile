@@ -4,19 +4,6 @@ $:.uniq!
 
 require 'rubygems'
 require 'rake'
-require 'rake/testtask'
-require 'rake/rdoctask'
-require 'rake/packagetask'
-require 'rake/gempackagetask'
-require 'rake/contrib/rubyforgepublisher'
-
-begin
-  require 'spec/rake/spectask'
-rescue LoadError
-  STDERR.puts 'Please install rspec:'
-  STDERR.puts 'sudo gem install rspec'
-  exit(1)
-end
 
 require File.join(File.dirname(__FILE__), 'lib/skeleton', 'version')
 
@@ -26,15 +13,11 @@ PKG_VERSION        = Skeleton::VERSION::STRING
 PKG_FILE_NAME      = "#{PKG_NAME}-#{PKG_VERSION}"
 
 RELEASE_NAME       = "REL #{PKG_VERSION}"
-
-RUBY_FORGE_PROJECT = PKG_NAME
-RUBY_FORGE_USER    = 'sporkmonger'
-RUBY_FORGE_PATH    = "/var/www/gforge-projects/#{RUBY_FORGE_PROJECT}"
-RUBY_FORGE_URL     = "http://#{RUBY_FORGE_PROJECT}.rubyforge.org/"
+GIT_HUB_URL        = "https://github.com/sporkmonger/skeleton"
 
 PKG_AUTHOR         = 'Bob Aman'
 PKG_AUTHOR_EMAIL   = 'bob@sporkmonger.com'
-PKG_HOMEPAGE       = RUBY_FORGE_URL
+PKG_HOMEPAGE       = GIT_HUB_URL
 PKG_SUMMARY        = 'Package Summary'
 PKG_DESCRIPTION    = <<-TEXT
 Library description goes here.
@@ -44,7 +27,7 @@ PKG_FILES = FileList[
     'lib/**/*', 'spec/**/*', 'vendor/**/*',
     'tasks/**/*', 'website/**/*',
     '[A-Z]*', 'Rakefile'
-].exclude(/database\.yml/).exclude(/[_\.]git$/)
+].exclude(/database\.yml/).exclude(/[_\.]git$/).exclude(/Gemfile\.lock/)
 
 RCOV_ENABLED = (RUBY_PLATFORM != 'java' && RUBY_VERSION =~ /^1\.8/)
 if RCOV_ENABLED

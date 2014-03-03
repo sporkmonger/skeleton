@@ -1,0 +1,25 @@
+branches:
+  only:
+    - master
+    - travis
+language: ruby
+rvm:
+  - 1.9.2
+  - 1.9.3
+  - 2.0.0
+  - 2.1.0
+  - rbx
+  - jruby-19mode
+  - jruby-20mode
+  - ree
+script: "bundle exec rake spec"
+jdk: openjdk7
+notifications:
+  email:
+    recipients:
+      - bob@sporkmonger.com
+    on_success: change
+    on_failure: change
+matrix:
+  allow_failures:
+    - rvm: rbx
