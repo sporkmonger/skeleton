@@ -1,51 +1,44 @@
-require 'spec/rake/verify_rcov'
+require "rspec/core/rake_task"
 
 namespace :spec do
-  Spec::Rake::SpecTask.new(:rcov) do |t|
-    t.spec_files = FileList['spec/**/*_spec.rb']
-    t.spec_opts = ['--color', '--format', 'specdoc']
-    if RCOV_ENABLED
-      if `which rcov`.strip == ""
-        STDERR.puts "Please install rcov:"
-        STDERR.puts "sudo gem install relevance-rcov"
-        exit(1)
-      end
-      t.rcov = true
-    else
-      t.rcov = false
-    end
+  RSpec::Core::RakeTask.new(:rcov) do |t|
+    t.pattern = FileList['spec/**/*_spec.rb']
+    t.rspec_opts = ['--color', '--format', 'documentation']
+
+    t.rcov = RCOV_ENABLED
     t.rcov_opts = [
+      '--exclude', 'lib\\/compat',
       '--exclude', 'spec',
+      '--exclude', '\\.rvm\\/gems',
       '--exclude', '1\\.8\\/gems',
       '--exclude', '1\\.9\\/gems',
-      '--exclude', 'addressable\\/idna\\.rb', # unicode tables too big
+      '--exclude', '\\.rvm',
+      '--exclude', '\\/Library\\/Ruby',
     ]
   end
 
-  Spec::Rake::SpecTask.new(:normal) do |t|
-    t.spec_files = FileList['spec/**/*_spec.rb']
-    t.spec_opts = ['--color', '--format', 'specdoc']
+  RSpec::Core::RakeTask.new(:normal) do |t|
+    t.pattern = FileList['spec/**/*_spec.rb'].exclude(/compat/)
+    t.rspec_opts = ['--color', '--format', 'documentation']
     t.rcov = false
   end
 
-  if RCOV_ENABLED
-    RCov::VerifyTask.new(:verify) do |t|
-      t.threshold = 100.0
-      t.index_html = 'coverage/index.html'
-    end
-
-    task :verify => :rcov
+  RSpec::Core::RakeTask.new(:all) do |t|
+    t.pattern = FileList['spec/**/*_spec.rb']
+    t.rspec_opts = ['--color', '--format', 'documentation']
+    t.rcov = false
   end
 
   desc "Generate HTML Specdocs for all specs"
-  Spec::Rake::SpecTask.new(:specdoc) do |t|
+  RSpec::Core::RakeTask.new(:specdoc) do |t|
     specdoc_path = File.expand_path(
-      File.join(File.dirname(__FILE__), '../specdoc/'))
+      File.join(File.dirname(__FILE__), '..', 'documentation')
+    )
     Dir.mkdir(specdoc_path) if !File.exist?(specdoc_path)
 
     output_file = File.join(specdoc_path, 'index.html')
-    t.spec_files = FileList['spec/**/*_spec.rb']
-    t.spec_opts = ["--format", "\"html:#{output_file}\"", "--diff"]
+    t.pattern = FileList['spec/**/*_spec.rb']
+    t.rspec_opts = ["--format", "\"html:#{output_file}\"", "--diff"]
     t.fail_on_error = false
   end
 
@@ -58,12 +51,7 @@ namespace :spec do
   end
 end
 
-if RCOV_ENABLED
-  desc "Alias to spec:verify"
-  task "spec" => "spec:verify"
-else
-  desc "Alias to spec:normal"
-  task "spec" => "spec:normal"
-end
+desc "Alias to spec:normal"
+task "spec" => "spec:normal"
 
 task "clobber" => ["spec:clobber_rcov"]
